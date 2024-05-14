@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+      {{ flight.from | city : "long" | titlecase }} -
+      {{ flight.to | asyncCity : "short" | async | uppercase }}
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="card-body">
+      <div>
+        <span class="badge bg-primary text-white">{{
+          flight.date | date
+        }}</span>
+        <span class="badge bg-danger text-white" *ngIf="flight.delayed"
+          >Delayed</span
+        >
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <a role="button" class="link-primary" (click)="toggleSelect()">{{
+      selected ? "Deselect" : "Select"
+    }}</a>
+  </div>
+</div>

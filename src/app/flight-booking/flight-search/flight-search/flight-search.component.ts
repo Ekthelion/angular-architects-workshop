@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Flight } from '../../entities/flights';
-import { HttpClient } from '@angular/common/http';
 import { AbstractFlightService } from '../flight.service';
+import { Flight } from '../../../entities/flights';
 
 @Component({
   selector: 'app-flight-search',
@@ -18,6 +17,7 @@ export class FlightSearchComponent implements OnInit {
 
   flights: Flight[] = [];
   selectedFlight: Flight | null = null;
+  basket: Record<number, boolean> = {};
 
   messageSuccess: string = '';
   messageError: string = '';

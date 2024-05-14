@@ -1,14 +1,9 @@
-// import { HttpClient } from '@angular/common/http';
 import { Pipe, PipeTransform } from '@angular/core';
-import { AirportService } from '../../services/airport.service';
-import { Observable } from 'rxjs';
 
 @Pipe({
   name: 'city',
 })
 export class CityPipe implements PipeTransform {
-  constructor(private airportService: AirportService) {}
-
   transform(value: string, format: 'short' | 'long' = 'short'): string {
     switch (value) {
       case 'Wien':

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AirportService } from '../../services/airport.service';
+import { AirportService } from '../services/airport.service';
 import { Observable } from 'rxjs';
 
 @Pipe({

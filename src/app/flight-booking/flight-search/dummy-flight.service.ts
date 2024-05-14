@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractFlightService } from './flight.service';
 import { Observable, of } from 'rxjs';
-import { Flight } from '../entities/flights';
+import { Flight } from '../../entities/flights';
 
 @Injectable()
 export class DummyFlightService implements AbstractFlightService {

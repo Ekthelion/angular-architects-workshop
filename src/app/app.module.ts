@@ -1,35 +1,15 @@
-import { NavbarComponent } from './navbar/navbar.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { DATE_PIPE_DEFAULT_OPTIONS, DatePipeConfig } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FlightSearchComponent } from './flight-search/flight-search/flight-search.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import {
-  CommonModule,
-  DATE_PIPE_DEFAULT_OPTIONS,
-  DatePipeConfig,
-} from '@angular/common';
 import { BASE_URL } from './config/base-url.token';
-import { CityPipe } from './shared/pipes/city.pipe';
-import { StatusColorPipe } from './shared/pipes/status-color.pipe';
-import { StatusFilterPipe } from './shared/pipes/status-filter.pipe';
-import { AsyncCityPipe } from './shared/pipes/async-city.pipe';
+import { CoreModule } from './core/core.module';
+import { FlightBookingModule } from './flight-booking/flight-booking.module';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, HttpClientModule, CommonModule],
-  declarations: [
-    AppComponent,
-    SidebarComponent,
-    NavbarComponent,
-    FlightSearchComponent,
-    CityPipe,
-    StatusColorPipe,
-    StatusFilterPipe,
-    AsyncCityPipe,
-  ],
+  imports: [BrowserModule, CoreModule, FlightBookingModule],
+  declarations: [AppComponent],
   providers: [
     {
       provide: DATE_PIPE_DEFAULT_OPTIONS,
