@@ -2,27 +2,24 @@
   class="card"
   [ngClass]="{ 'bg-secondary': selected, 'text-white': selected }"
 >
-  <div class="card-header">
-    <div class="card-title">
+  <div class="card-body">
+    <h5 class="card-title">
       {{ flight.from | city : "long" | titlecase }} -
       {{ flight.to | asyncCity : "short" | async | uppercase }}
-    </div>
-  </div>
-  <div class="card-content">
-    <div class="card-body">
-      <div>
-        <span class="badge bg-primary text-white">{{
-          flight.date | date
-        }}</span>
-        <span class="badge bg-danger text-white" *ngIf="flight.delayed"
-          >Delayed</span
-        >
+    </h5>
+    <ng-content select=".card-subtitle"></ng-content>
+    <div class="card-text">
+      <div class="gap-2">
+        <!-- <app-flight-date [date]="flight.date"></app-flight-date> -->
+        <app-status-toggle [(status)]="flight.delayed"></app-status-toggle>
       </div>
     </div>
+    <div class="card-text"><ng-content select=".bottom"></ng-content></div>
   </div>
   <div class="card-footer">
-    <a role="button" class="link-primary" (click)="toggleSelect()">{{
+    <a role="button" class="link-primary card-link" (click)="toggleSelect()">{{
       selected ? "Deselect" : "Select"
     }}</a>
+    <a role="button" class="link-warning card-link" (click)="edit()">Edit</a>
   </div>
 </div>

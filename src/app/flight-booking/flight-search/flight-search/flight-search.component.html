@@ -43,7 +43,15 @@
     [flight]="flight"
     [selected]="basket[flight.id]"
     (selectedChange)="basket[flight.id] = $event"
-  ></app-flight-card>
+    (editFlight)="editFlight($event)"
+  >
+    <h6 class="card-subtitle">
+      {{ flight.date | date }}
+    </h6>
+    <pre class="bottom">
+      {{ flight | json }}
+    </pre>
+  </app-flight-card>
 </div>
 
 <div class="card" *ngIf="selectedFlight">

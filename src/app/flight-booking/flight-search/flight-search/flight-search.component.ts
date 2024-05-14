@@ -44,6 +44,10 @@ export class FlightSearchComponent implements OnInit {
     this.clearMessages();
   }
 
+  editFlight(flight: Flight): void {
+    this.selectFlight(flight);
+  }
+
   clearMessages(): void {
     this.messageSuccess = '';
     this.messageError = '';

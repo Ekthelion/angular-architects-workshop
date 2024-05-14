@@ -1,0 +1,8 @@
+<a role="button" (click)="toggleStatus()">
+  <span
+    class="badge text-white"
+    [ngClass]="{ 'bg-danger': status, 'bg-success': !status }"
+  >
+    {{ status ? "Delayed" : "On time" }}
+  </span>
+</a>

@@ -20,9 +20,14 @@ export class FlightCardComponent {
   selected: boolean = false;
 
   @Output() selectedChange = new EventEmitter<boolean>();
+  @Output() editFlight = new EventEmitter<Flight>();
 
   toggleSelect(): void {
     this.selected = !this.selected;
     this.selectedChange.emit(this.selected);
+  }
+
+  edit() {
+    this.editFlight.emit(this.flight);
   }
 }
