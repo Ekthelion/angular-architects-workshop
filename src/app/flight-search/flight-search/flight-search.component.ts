@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Flight } from '../../entities/flights';
 import { HttpClient } from '@angular/common/http';
+import { AbstractFlightService } from '../flight.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -13,8 +14,7 @@ export class FlightSearchComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  private httpClient = inject(HttpClient);
-  // constructor(private httpClient: HttpClient) {}
+  private flightService = inject(AbstractFlightService);
 
   flights: Flight[] = [];
   selectedFlight: Flight | null = null;
@@ -24,11 +24,9 @@ export class FlightSearchComponent implements OnInit {
 
   search(): void {
     this.selectFlight(null);
-    // console.log('search', this.from, this.to);
-    const url = 'https://demo.angulararchitects.io/api/flight';
     const params = { from: this.from, to: this.to };
-    const headers = { Accept: 'application/json' };
-    this.httpClient.get<Flight[]>(url, { params, headers }).subscribe({
+
+    this.flightService.search(params).subscribe({
       next: (flights) => {
         this.flights = flights;
       },
@@ -52,11 +50,12 @@ export class FlightSearchComponent implements OnInit {
   }
 
   save(): void {
-    console.log('save', this.selectedFlight);
-    const url = 'https://demo.angulararchitects.io/api/flight';
     const body = this.selectedFlight;
-    const headers = { Accept: 'application/json' };
-    this.httpClient.post<Flight>(url, body, { headers }).subscribe({
+    if (!body) {
+      return;
+    }
+
+    this.flightService.save(body).subscribe({
       next: (flight) => {
         this.messageSuccess = 'Flight saved successfully';
         this.messageError = '';
