@@ -1,17 +1,18 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { AbstractFlightService } from '../flight.service';
 import { Flight } from '../../../entities/flights';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
   styleUrl: './flight-search.component.scss',
 })
-export class FlightSearchComponent implements OnInit {
+export class FlightSearchComponent {
+  @ViewChild('form', { static: true }) form!: NgForm;
+
   from = '';
   to = '';
-
-  ngOnInit(): void {}
 
   private flightService = inject(AbstractFlightService);
 
@@ -24,9 +25,9 @@ export class FlightSearchComponent implements OnInit {
 
   search(): void {
     this.selectFlight(null);
-    const params = { from: this.from, to: this.to };
+    const { from, to } = this.form.value as { from: string; to: string };
 
-    this.flightService.search(params).subscribe({
+    this.flightService.search({ from, to }).subscribe({
       next: (flights) => {
         this.flights = flights;
       },
@@ -63,7 +64,6 @@ export class FlightSearchComponent implements OnInit {
       next: (flight) => {
         this.messageSuccess = 'Flight saved successfully';
         this.messageError = '';
-        console.log('flight', flight);
       },
       error: (err) => {
         this.messageError = 'Error saving flight';
@@ -71,7 +71,7 @@ export class FlightSearchComponent implements OnInit {
         console.error('err', err);
       },
       complete: () => {
-        console.log('complete');
+        // console.log('complete');
       },
     });
   }

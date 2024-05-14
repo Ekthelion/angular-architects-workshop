@@ -1,40 +1,51 @@
 <div class="container">
-  <div class="mb-3 form-group">
-    <label for="from" class="form-label">From</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="From"
-      name="from"
-      [(ngModel)]="from"
-    />
-  </div>
-  <div class="mb-3 form-group">
-    <label for="to" class="form-label">To</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="To"
-      name="to"
-      [ngModel]="to"
-      (ngModelChange)="to = $event"
-    />
-  </div>
+  <form #form="ngForm">
+    <div class="mb-3 form-group">
+      <label for="from" class="form-label">From</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="From"
+        name="from"
+        [(ngModel)]="from"
+        required
+        minlength="3"
+      />
+      <!-- <div>Errors: {{ form?.controls?.['from']?.errors | json }}</div> -->
+    </div>
+    <div class="mb-3 form-group">
+      <label for="to" class="form-label">To</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="To"
+        name="to"
+        [ngModel]="to"
+        (ngModelChange)="to = $event"
+        required
+        minlength="3"
+      />
+      <!-- <div>Errors: {{ form?.controls?.['to']?.errors | json }}</div> -->
+    </div>
 
-  <div
-    class="btn-toolbar justify-content-between"
-    role="toolbar"
-    aria-label="Toolbar with button groups"
-  >
-    <button
-      class="btn btn-default"
-      [disabled]="!from || !to"
-      (click)="search()"
+    <div
+      class="btn-toolbar justify-content-between"
+      role="toolbar"
+      aria-label="Toolbar with button groups"
     >
-      Search
-    </button>
-    <button class="btn btn-primary" (click)="addFlight()">Add</button>
-  </div>
+      <button
+        class="btn btn-default"
+        type="submit"
+        [disabled]="form.invalid"
+        (click)="search()"
+      >
+        Search
+      </button>
+      <button class="btn btn-primary" type="button" (click)="addFlight()">
+        Add
+      </button>
+    </div>
+  </form>
 </div>
 
 <div class="container">
