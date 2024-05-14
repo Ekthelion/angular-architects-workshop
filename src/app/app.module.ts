@@ -13,6 +13,7 @@ import {
   DatePipeConfig,
 } from '@angular/common';
 import { BASE_URL } from './config/base-url.token';
+import { CityPipe } from './shared/pipes/city.pipe';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule, CommonModule],
@@ -21,6 +22,7 @@ import { BASE_URL } from './config/base-url.token';
     SidebarComponent,
     NavbarComponent,
     FlightSearchComponent,
+    CityPipe,
   ],
   providers: [
     {

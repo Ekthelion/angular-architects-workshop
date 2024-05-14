@@ -50,8 +50,8 @@
       [ngClass]="{ 'table-active': selectedFlight?.id === flight.id }"
     >
       <td>{{ flight.id }}</td>
-      <td>{{ flight.from }}</td>
-      <td>{{ flight.to }}</td>
+      <td>{{ flight.from | city : "short" | uppercase }}</td>
+      <td>{{ flight.to | city : "long" | titlecase }}</td>
       <td>{{ flight.date | date }}</td>
       <td>
         <a role="button" class="link-primary" (click)="selectFlight(flight)"
