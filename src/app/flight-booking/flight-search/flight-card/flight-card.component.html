@@ -1,4 +1,7 @@
-<div class="card">
+<div
+  class="card"
+  [ngClass]="{ 'bg-secondary': selected, 'text-white': selected }"
+>
   <div class="card-header">
     <div class="card-title">
       {{ flight.from | city : "long" | titlecase }} -
