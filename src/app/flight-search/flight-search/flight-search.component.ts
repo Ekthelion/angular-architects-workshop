@@ -81,4 +81,8 @@ export class FlightSearchComponent implements OnInit {
       delayed: false,
     };
   }
+
+  cancel(): void {
+    this.selectFlight(null);
+  }
 }

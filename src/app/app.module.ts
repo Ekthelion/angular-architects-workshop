@@ -14,6 +14,9 @@ import {
 } from '@angular/common';
 import { BASE_URL } from './config/base-url.token';
 import { CityPipe } from './shared/pipes/city.pipe';
+import { StatusColorPipe } from './shared/pipes/status-color.pipe';
+import { StatusFilterPipe } from './shared/pipes/status-filter.pipe';
+import { AsyncCityPipe } from './shared/pipes/async-city.pipe';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule, CommonModule],
@@ -23,6 +26,9 @@ import { CityPipe } from './shared/pipes/city.pipe';
     NavbarComponent,
     FlightSearchComponent,
     CityPipe,
+    StatusColorPipe,
+    StatusFilterPipe,
+    AsyncCityPipe,
   ],
   providers: [
     {
