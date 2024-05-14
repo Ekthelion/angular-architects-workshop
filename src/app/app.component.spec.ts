@@ -16,16 +16,18 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'flight42'`, () => {
+  it(`should have as title 'Flight42'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('flight42');
+    expect(app.title).toEqual('Flight42');
   });
 
-  it('should render title', () => {
+  it('should render text logo', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, flight42');
+    expect(
+      compiled.querySelector('.logo .logo-normal.simple-text')?.textContent
+    ).toContain('Flights 42');
   });
 });
