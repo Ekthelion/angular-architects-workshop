@@ -7,6 +7,7 @@ import { FlightCardComponent } from './flight-search/flight-card/flight-card.com
 import { FlightSearchComponent } from './flight-search/flight-search/flight-search.component';
 import { StatusToggleComponent } from './flight-search/status-toggle/status-toggle.component';
 import { FlightDateComponent } from './flight-search/flight-date/flight-date.component';
+import { FlightEditComponent } from './flight-search/flight-edit/flight-edit.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { FlightDateComponent } from './flight-search/flight-date/flight-date.com
     FlightCardComponent,
     StatusToggleComponent,
     FlightDateComponent,
+    FlightEditComponent,
   ],
   imports: [
     CommonModule,

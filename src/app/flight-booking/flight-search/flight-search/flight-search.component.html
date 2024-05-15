@@ -88,15 +88,25 @@
 </div>
 
 <div class="container">
+  <div class="alert alert-success" *ngIf="messageSuccess">
+    {{ messageSuccess }}
+  </div>
+  <div class="alert alert-danger" *ngIf="messageError">
+    {{ messageError }}
+  </div>
+</div>
+
+<div class="container" *ngIf="editedFlight">
+  <app-flight-edit
+    [flight]="editedFlight"
+    (cancel)="cancelEdit()"
+    (save)="save($event)"
+  />
+</div>
+
+<div class="container">
   <div class="card" *ngIf="selectedFlight">
     <div class="card-body">
-      <div class="alert alert-success" *ngIf="messageSuccess">
-        {{ messageSuccess }}
-      </div>
-      <div class="alert alert-danger" *ngIf="messageError">
-        {{ messageError }}
-      </div>
-
       <div class="form-group" *ngIf="selectedFlight.id !== 0">
         <label>Id</label>
         <input
@@ -139,14 +149,16 @@
       >
         <button
           class="btn btn-primary"
-          (click)="save()"
+          (click)="save(selectedFlight)"
           [disabled]="
             !selectedFlight.from || !selectedFlight.to || !selectedFlight.date
           "
         >
           Save
         </button>
-        <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+        <button class="btn btn-secondary" (click)="cancelSelect()">
+          Cancel
+        </button>
       </div>
     </div>
   </div>

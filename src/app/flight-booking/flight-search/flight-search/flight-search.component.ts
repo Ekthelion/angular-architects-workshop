@@ -48,6 +48,7 @@ export class FlightSearchComponent {
   flights: Flight[] = [];
   selectedFlight: Flight | null = null;
   basket: Record<number, boolean> = {};
+  editedFlight: Flight | null = null;
 
   messageSuccess: string = '';
   messageError: string = '';
@@ -75,7 +76,7 @@ export class FlightSearchComponent {
   }
 
   editFlight(flight: Flight): void {
-    this.selectFlight(flight);
+    this.editedFlight = flight;
   }
 
   clearMessages(): void {
@@ -83,8 +84,8 @@ export class FlightSearchComponent {
     this.messageError = '';
   }
 
-  save(): void {
-    const body = this.selectedFlight;
+  save(flight: Flight): void {
+    const body = flight;
     if (!body) {
       return;
     }
@@ -99,9 +100,7 @@ export class FlightSearchComponent {
         this.messageSuccess = '';
         console.error('err', err);
       },
-      complete: () => {
-        // console.log('complete');
-      },
+      complete: () => {},
     });
   }
 
@@ -115,7 +114,11 @@ export class FlightSearchComponent {
     });
   }
 
-  cancel(): void {
+  cancelSelect(): void {
     this.selectFlight(null);
+  }
+
+  cancelEdit(): void {
+    this.editedFlight = null;
   }
 }

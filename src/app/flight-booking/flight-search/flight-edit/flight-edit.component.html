@@ -1,0 +1,82 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="form">
+      <div class="mb-3 form-group">
+        <label for="from" class="form-label">ID</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="ID"
+          name="id"
+          formControlName="id"
+        />
+      </div>
+      <div class="mb-3 form-group">
+        <label for="from" class="form-label">From</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="From"
+          name="from"
+          formControlName="from"
+          required
+          minlength="3"
+        />
+        <div>Errors: {{ form.controls["from"].errors | json }}</div>
+      </div>
+      <div class="mb-3 form-group">
+        <label for="to" class="form-label">To</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="To"
+          name="to"
+          formControlName="to"
+          required
+          minlength="3"
+        />
+        <div>Errors: {{ form.controls["to"].errors | json }}</div>
+      </div>
+      <div class="mb-3 form-group">
+        <label for="to" class="form-label">To</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Date"
+          name="date"
+          formControlName="date"
+          required
+          minlength="3"
+        />
+        <div>Errors: {{ form.controls["date"].errors | json }}</div>
+      </div>
+      <div class="form-group">
+        <input
+          name="delayed"
+          type="checkbox"
+          class="mr-2"
+          formControlName="delayed"
+        />
+        <label for="delayed">delayed</label>
+      </div>
+
+      <div
+        class="btn-toolbar justify-content-between"
+        role="toolbar"
+        aria-label="Toolbar with button groups"
+      >
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="form.invalid"
+          (click)="saveEdit()"
+        >
+          Save
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="cancelEdit()">
+          cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
