@@ -6,7 +6,9 @@ describe('DummyFlightService', () => {
   let service: DummyFlightService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [DummyFlightService],
+    });
     service = TestBed.inject(DummyFlightService);
   });
 

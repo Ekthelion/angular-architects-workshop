@@ -1,11 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { FlightBookingModule } from './flight-booking/flight-booking.module';
+import { CoreModule } from './core/core.module';
+import { BASE_URL } from './config/base-url.token';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
+      declarations: [AppComponent],
+      imports: [CoreModule, FlightBookingModule],
+      providers: [
+        {
+          provide: BASE_URL,
+          useValue: 'https://demo.angulararchitects.io/api/flight',
+        },
       ],
     }).compileComponents();
   });
