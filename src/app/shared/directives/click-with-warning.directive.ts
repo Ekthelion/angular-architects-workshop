@@ -10,7 +10,16 @@ import {
 } from '@angular/core';
 
 @Directive({
+  selector: '[appButtonWithWarning]',
+  standalone: true,
+})
+export class ButtonWithWarningDirective {
+  @HostBinding('class') className: string = 'btn btn-danger';
+}
+
+@Directive({
   selector: 'button[appClickWithWarning]',
+  hostDirectives: [ButtonWithWarningDirective],
 })
 export class ClickWithWarningDirective implements OnInit {
   @Input() appClickWithWarning: string = 'Are you sure?';
@@ -18,8 +27,6 @@ export class ClickWithWarningDirective implements OnInit {
   @Output() confirmed = new EventEmitter<boolean>();
 
   constructor(private elementRef: ElementRef) {}
-
-  @HostBinding('class') className: string = 'btn btn-danger';
 
   @HostListener('click', ['$event'])
   onMouseClick(event: MouseEvent) {
