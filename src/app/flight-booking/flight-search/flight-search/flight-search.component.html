@@ -1,4 +1,15 @@
 <div class="container">
+  <h1 class="h1" appHighlight [appTooltip]="tooltip">Flight Search</h1>
+</div>
+<ng-template #tooltip>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Tooltip</h5>
+      <p class="card-text">This is a tooltip</p>
+    </div>
+  </div>
+</ng-template>
+<div class="container">
   <form #form="ngForm">
     <div class="mb-3 form-group">
       <label for="from" class="form-label">From</label>
@@ -46,6 +57,9 @@
       </button>
     </div>
   </form>
+  <pre>
+    {{ form.value | json }}
+  </pre>
 </div>
 
 <div class="container">
