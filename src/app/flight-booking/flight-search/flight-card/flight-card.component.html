@@ -21,5 +21,11 @@
       selected ? "Deselect" : "Select"
     }}</a>
     <a role="button" class="link-warning card-link" (click)="edit()">Edit</a>
+    <a
+      role="button"
+      class="link-warning card-link"
+      [routerLink]="['/flight-search', flight.id, 'details']"
+      >Details</a
+    >
   </div>
 </div>
