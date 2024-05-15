@@ -6,6 +6,7 @@ import { StatusFilterPipe } from './pipes/status-filter.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
 import { UserRoleDirective } from './directives/user-role.directive';
+import { ClickWithWarningDirective } from './directives/click-with-warning.directive';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { UserRoleDirective } from './directives/user-role.directive';
     HighlightDirective,
     TooltipDirective,
     UserRoleDirective,
+    ClickWithWarningDirective,
   ],
   imports: [],
   exports: [
@@ -26,6 +28,7 @@ import { UserRoleDirective } from './directives/user-role.directive';
     HighlightDirective,
     TooltipDirective,
     UserRoleDirective,
+    ClickWithWarningDirective,
   ],
 })
 export class SharedModule {}
