@@ -17,7 +17,7 @@ import { BASE_URL } from '../../config/base-url.token';
   deps: [HttpClient, BASE_URL],
 })
 export abstract class AbstractFlightService {
-  abstract search(params: { from: string; to: string }): Observable<Flight[]>;
+  abstract search(params: { from?: string; to?: string }): Observable<Flight[]>;
 
   abstract save(flight: Flight): Observable<Flight>;
 }

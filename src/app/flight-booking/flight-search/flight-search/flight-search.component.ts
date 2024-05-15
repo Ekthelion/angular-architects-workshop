@@ -1,7 +1,14 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AbstractFlightService } from '../flight.service';
 import { Flight } from '../../../entities/flights';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CityValidators } from '../../../shared/validators/city.validators';
+
+interface SearchForm {
+  from: FormControl<string>;
+  to: FormControl<string>;
+  withValidators: FormControl<boolean>;
+}
 
 @Component({
   selector: 'app-flight-search',
@@ -9,12 +16,34 @@ import { NgForm } from '@angular/forms';
   styleUrl: './flight-search.component.scss',
 })
 export class FlightSearchComponent {
-  @ViewChild('form', { static: true }) form!: NgForm;
-
-  from = '';
-  to = '';
-
   private flightService = inject(AbstractFlightService);
+
+  form = new FormGroup<SearchForm>({
+    from: new FormControl('London', {
+      validators: [
+        Validators.required,
+        Validators.minLength(3),
+        // CityValidators.validateCity,
+      ],
+      asyncValidators: [CityValidators.asyncValidateCity(this.flightService)],
+      nonNullable: true,
+    }),
+    to: new FormControl('Wien', {
+      validators: [
+        Validators.required,
+        Validators.minLength(3),
+        CityValidators.validateCityWithParams([
+          'Graz',
+          'Hamburg',
+          'Wien',
+          'London',
+        ]),
+      ],
+      asyncValidators: [],
+      nonNullable: true,
+    }),
+    withValidators: new FormControl(true, { nonNullable: true }),
+  });
 
   flights: Flight[] = [];
   selectedFlight: Flight | null = null;
@@ -25,7 +54,7 @@ export class FlightSearchComponent {
 
   search(): void {
     this.selectFlight(null);
-    const { from, to } = this.form.value as { from: string; to: string };
+    const { from, to } = this.form.getRawValue();
 
     this.flightService.search({ from, to }).subscribe({
       next: (flights) => {
@@ -77,13 +106,13 @@ export class FlightSearchComponent {
   }
 
   addFlight() {
-    this.selectedFlight = {
+    this.selectFlight({
       id: 0,
-      from: this.from,
-      to: this.to,
+      from: this.form.controls.from.value,
+      to: this.form.controls.to.value,
       date: new Date().toISOString(),
       delayed: false,
-    };
+    });
   }
 
   cancel(): void {

@@ -10,7 +10,7 @@
   </div>
 </ng-template>
 <div class="container" *appUserRole="'admin'">
-  <form #form="ngForm">
+  <form [formGroup]="form">
     <div class="mb-3 form-group">
       <label for="from" class="form-label">From</label>
       <input
@@ -18,11 +18,11 @@
         class="form-control"
         placeholder="From"
         name="from"
-        [(ngModel)]="from"
+        formControlName="from"
         required
         minlength="3"
       />
-      <!-- <div>Errors: {{ form?.controls?.['from']?.errors | json }}</div> -->
+      <div>Errors: {{ form.controls["from"].errors | json }}</div>
     </div>
     <div class="mb-3 form-group">
       <label for="to" class="form-label">To</label>
@@ -31,12 +31,20 @@
         class="form-control"
         placeholder="To"
         name="to"
-        [ngModel]="to"
-        (ngModelChange)="to = $event"
+        formControlName="to"
         required
         minlength="3"
       />
-      <!-- <div>Errors: {{ form?.controls?.['to']?.errors | json }}</div> -->
+      <div>Errors: {{ form.controls["to"].errors | json }}</div>
+    </div>
+    <div class="form-group">
+      <input
+        name="withValidators"
+        type="checkbox"
+        class="mr-2"
+        formControlName="withValidators"
+      />
+      <label for="withValidators">with Validators (not implemented)</label>
     </div>
 
     <div
@@ -52,12 +60,7 @@
       >
         Search
       </button>
-      <button
-        class="btn btn-primary"
-        type="button"
-        (click)="addFlight()"
-        appClickWithWarning="Sure?"
-      >
+      <button class="btn btn-primary" type="button" (click)="addFlight()">
         Add
       </button>
     </div>
@@ -84,65 +87,67 @@
   </app-flight-card>
 </div>
 
-<div class="card" *ngIf="selectedFlight">
-  <div class="card-body">
-    <div class="alert alert-success" *ngIf="messageSuccess">
-      {{ messageSuccess }}
-    </div>
-    <div class="alert alert-danger" *ngIf="messageError">
-      {{ messageError }}
-    </div>
+<div class="container">
+  <div class="card" *ngIf="selectedFlight">
+    <div class="card-body">
+      <div class="alert alert-success" *ngIf="messageSuccess">
+        {{ messageSuccess }}
+      </div>
+      <div class="alert alert-danger" *ngIf="messageError">
+        {{ messageError }}
+      </div>
 
-    <div class="form-group" *ngIf="selectedFlight.id !== 0">
-      <label>Id</label>
-      <input
-        class="form-control"
-        name="from"
-        readonly
-        [disabled]="true"
-        [(ngModel)]="selectedFlight.id"
-      />
-    </div>
+      <div class="form-group" *ngIf="selectedFlight.id !== 0">
+        <label>Id</label>
+        <input
+          class="form-control"
+          name="from"
+          readonly
+          [disabled]="true"
+          [(ngModel)]="selectedFlight.id"
+        />
+      </div>
 
-    <div class="form-group">
-      <label>From</label>
-      <input class="form-control" [(ngModel)]="selectedFlight.from" />
-    </div>
+      <div class="form-group">
+        <label>From</label>
+        <input class="form-control" [(ngModel)]="selectedFlight.from" />
+      </div>
 
-    <div class="form-group">
-      <label>To</label>
-      <input class="form-control" [(ngModel)]="selectedFlight.to" />
-    </div>
+      <div class="form-group">
+        <label>To</label>
+        <input class="form-control" [(ngModel)]="selectedFlight.to" />
+      </div>
 
-    <div class="form-group">
-      <label>Date</label>
-      <input class="form-control" [(ngModel)]="selectedFlight.date" />
-    </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input class="form-control" [(ngModel)]="selectedFlight.date" />
+      </div>
 
-    <div class="form-group">
-      <input
-        type="checkbox"
-        id="delayed"
-        [(ngModel)]="selectedFlight.delayed"
-      />
-      <label class="form-check-label" for="delayed"> delayed</label>
-    </div>
+      <div class="form-group">
+        <input
+          type="checkbox"
+          id="delayed"
+          [(ngModel)]="selectedFlight.delayed"
+        />
+        <label class="form-check-label" for="delayed"> delayed</label>
+      </div>
 
-    <div
-      class="btn-toolbar justify-content-between"
-      role="toolbar"
-      aria-label="Toolbar with button groups"
-    >
-      <button
-        class="btn btn-primary"
-        (click)="save()"
-        [disabled]="
-          !selectedFlight.from || !selectedFlight.to || !selectedFlight.date
-        "
+      <div
+        class="btn-toolbar justify-content-between"
+        role="toolbar"
+        aria-label="Toolbar with button groups"
       >
-        Save
-      </button>
-      <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+        <button
+          class="btn btn-primary"
+          (click)="save()"
+          [disabled]="
+            !selectedFlight.from || !selectedFlight.to || !selectedFlight.date
+          "
+        >
+          Save
+        </button>
+        <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      </div>
     </div>
   </div>
 </div>

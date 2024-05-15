@@ -19,7 +19,7 @@ export class ButtonWithWarningDirective {
 
 @Directive({
   selector: 'button[appClickWithWarning]',
-  hostDirectives: [ButtonWithWarningDirective],
+  // hostDirectives: [ButtonWithWarningDirective],
 })
 export class ClickWithWarningDirective implements OnInit {
   @Input() appClickWithWarning: string = 'Are you sure?';
