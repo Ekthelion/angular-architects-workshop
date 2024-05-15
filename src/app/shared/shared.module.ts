@@ -5,6 +5,7 @@ import { StatusColorPipe } from './pipes/status-color.pipe';
 import { StatusFilterPipe } from './pipes/status-filter.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { TooltipDirective } from './directives/tooltip.directive';
+import { UserRoleDirective } from './directives/user-role.directive';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { TooltipDirective } from './directives/tooltip.directive';
     AsyncCityPipe,
     HighlightDirective,
     TooltipDirective,
+    UserRoleDirective,
   ],
   imports: [],
   exports: [
@@ -23,6 +25,7 @@ import { TooltipDirective } from './directives/tooltip.directive';
     AsyncCityPipe,
     HighlightDirective,
     TooltipDirective,
+    UserRoleDirective,
   ],
 })
 export class SharedModule {}

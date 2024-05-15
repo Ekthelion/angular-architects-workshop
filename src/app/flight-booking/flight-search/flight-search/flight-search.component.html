@@ -9,7 +9,7 @@
     </div>
   </div>
 </ng-template>
-<div class="container">
+<div class="container" *appUserRole="'admin'">
   <form #form="ngForm">
     <div class="mb-3 form-group">
       <label for="from" class="form-label">From</label>
