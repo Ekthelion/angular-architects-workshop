@@ -21,4 +21,9 @@ export class DefaultFlightService implements AbstractFlightService {
     const headers = { Accept: 'application/json' };
     return this.httpClient.post<Flight>(this.baseUrl, body, { headers });
   }
+
+  flightById(id: number): Observable<Flight> {
+    const headers = { Accept: 'application/json' };
+    return this.httpClient.get<Flight>(`${this.baseUrl}/${id}`, { headers });
+  }
 }

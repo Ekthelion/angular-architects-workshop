@@ -20,4 +20,6 @@ export abstract class AbstractFlightService {
   abstract search(params: { from?: string; to?: string }): Observable<Flight[]>;
 
   abstract save(flight: Flight): Observable<Flight>;
+
+  abstract flightById(id: number): Observable<Flight>;
 }

@@ -36,4 +36,14 @@ export class DummyFlightService implements AbstractFlightService {
   save(flight: Flight): Observable<Flight> {
     return of(flight);
   }
+
+  flightById(id: number): Observable<Flight> {
+    return of({
+      id: 1,
+      from: 'Wien',
+      to: 'Leoben',
+      date: '25.04.2024',
+      delayed: false,
+    });
+  }
 }
