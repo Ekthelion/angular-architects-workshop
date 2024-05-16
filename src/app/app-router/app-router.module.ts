@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from '../home/pages/home-page/home-page.component';
 import { FlightSearchComponent } from '../flight-booking/flight-search/flight-search/flight-search.component';
-import { FlightEditComponent } from '../flight-booking/flight-search/flight-edit/flight-edit.component';
 import { FlightDetailsComponent } from '../flight-booking/flight-search/flight-details/flight-details.component';
 
 export const APP_ROUTES: Routes = [

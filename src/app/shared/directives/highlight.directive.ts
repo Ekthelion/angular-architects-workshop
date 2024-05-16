@@ -20,9 +20,9 @@ export class HighlightDirective implements OnInit {
 
   @HostBinding('style.backgroundColor') backgroundColor: string | null = null;
 
-  @HostListener('mouseenter', ['$event']) onMouseEnter(event: MouseEvent) {}
+  @HostListener('mouseenter', ['$event']) onMouseEnter() {}
 
-  @HostListener('mouseleave', ['$event']) onMouseLeave(event: MouseEvent) {}
+  @HostListener('mouseleave', ['$event']) onMouseLeave() {}
 
   constructor(private elementRef: ElementRef<HTMLElement>) {}
 

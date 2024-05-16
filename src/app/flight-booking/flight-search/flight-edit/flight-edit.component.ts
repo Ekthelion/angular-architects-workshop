@@ -7,8 +7,7 @@ import {
   inject,
 } from '@angular/core';
 import { Flight } from '../../../entities/flights';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CityValidators } from '../../../shared/validators/city.validators';
+import { FormGroup, FormControl } from '@angular/forms';
 import { AbstractFlightService } from '../flight.service';
 
 interface EditFlightForm {

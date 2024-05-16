@@ -1,6 +1,5 @@
 import {
   Directive,
-  ElementRef,
   Injectable,
   Input,
   TemplateRef,

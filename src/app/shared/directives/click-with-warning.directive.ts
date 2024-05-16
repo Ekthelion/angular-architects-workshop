@@ -21,7 +21,7 @@ export class ButtonWithWarningDirective {
   selector: 'button[appClickWithWarning]',
   // hostDirectives: [ButtonWithWarningDirective],
 })
-export class ClickWithWarningDirective implements OnInit {
+export class ClickWithWarningDirective {
   @Input() appClickWithWarning: string = 'Are you sure?';
 
   @Output() confirmed = new EventEmitter<boolean>();
@@ -38,6 +38,4 @@ export class ClickWithWarningDirective implements OnInit {
     }
     this.confirmed.emit(result);
   }
-
-  ngOnInit(): void {}
 }
