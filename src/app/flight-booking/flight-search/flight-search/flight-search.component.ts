@@ -16,7 +16,7 @@ interface SearchForm {
   styleUrl: './flight-search.component.scss',
 })
 export class FlightSearchComponent {
-  private flightService = inject(AbstractFlightService);
+  protected flightService = inject(AbstractFlightService);
 
   form = new FormGroup<SearchForm>({
     from: new FormControl('London', {
@@ -25,7 +25,7 @@ export class FlightSearchComponent {
         Validators.minLength(3),
         // CityValidators.validateCity,
       ],
-      asyncValidators: [CityValidators.asyncValidateCity(this.flightService)],
+      // asyncValidators: [CityValidators.asyncValidateCity(this.flightService)],
       nonNullable: true,
     }),
     to: new FormControl('Wien', {
@@ -39,69 +39,37 @@ export class FlightSearchComponent {
           'London',
         ]),
       ],
-      asyncValidators: [],
+      // asyncValidators: [CityValidators.asyncValidateCity(this.flightService)],
       nonNullable: true,
     }),
     withValidators: new FormControl(true, { nonNullable: true }),
   });
 
-  flights: Flight[] = [];
   selectedFlight: Flight | null = null;
   basket: Record<number, boolean> = {};
   editedFlight: Flight | null = null;
-
-  messageSuccess: string = '';
-  messageError: string = '';
 
   search(): void {
     this.selectFlight(null);
     const { from, to } = this.form.getRawValue();
 
-    this.flightService.search({ from, to }).subscribe({
-      next: (flights) => {
-        this.flights = flights;
-      },
-      error: (err) => {
-        console.error('err', err);
-      },
-      complete: () => {
-        // console.log('complete');
-      },
-    });
+    this.flightService.search(from, to);
   }
 
   selectFlight(flight: Flight | null): void {
     this.selectedFlight = flight;
-    this.clearMessages();
   }
 
   editFlight(flight: Flight): void {
     this.editedFlight = flight;
   }
 
-  clearMessages(): void {
-    this.messageSuccess = '';
-    this.messageError = '';
-  }
-
   save(flight: Flight): void {
-    const body = flight;
-    if (!body) {
+    if (!flight) {
       return;
     }
 
-    this.flightService.save(body).subscribe({
-      next: (flight) => {
-        this.messageSuccess = 'Flight saved successfully';
-        this.messageError = '';
-      },
-      error: (err) => {
-        this.messageError = 'Error saving flight';
-        this.messageSuccess = '';
-        console.error('err', err);
-      },
-      complete: () => {},
-    });
+    this.flightService.save(flight);
   }
 
   addFlight() {

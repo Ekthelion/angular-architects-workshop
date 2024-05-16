@@ -11,6 +11,7 @@ import {
   map,
   switchMap,
   takeUntil,
+  tap,
 } from 'rxjs';
 
 @Component({
@@ -26,10 +27,15 @@ export class FlightDetailsComponent implements OnInit, OnDestroy {
 
   public flight$ = this.route.paramMap.pipe(
     filter((params) => params.has('id')),
-    map((params) => Number(params.get('id'))),
-    filter((id) => !Number.isNaN(id)),
+    map((params) => +params.get('id')!),
+    filter((id) => !isNaN(id)),
+    tap((id) => this.flightService.flightById(id)),
     switchMap((id) =>
-      this.flightService.flightById(id).pipe(catchError(() => []))
+      this.flightService.flightsMap$.pipe(
+        map((flightsMap) => flightsMap[id]),
+        // catch inner observable error
+        catchError(() => [])
+      )
     )
   );
 

@@ -28,17 +28,21 @@ export class CityValidators {
     };
   }
 
-  static asyncValidateCity(flighService: AbstractFlightService) {
+  static asyncValidateCity(flightService: AbstractFlightService) {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      return flighService
-        .search({ from: control.value, to: '' })
-        .pipe(
-          map((flight) =>
-            flight.length > 0
-              ? null
-              : { city: { currentValue: control.value, allowedCities: [] } }
-          )
-        );
+      flightService.search(control.value, '');
+      return flightService.flights$.pipe(
+        map((flight) =>
+          flight.length === 0
+            ? {
+                asyncCity: {
+                  currentValue: control.value,
+                  response: flight,
+                },
+              }
+            : null
+        )
+      );
     };
   }
 }

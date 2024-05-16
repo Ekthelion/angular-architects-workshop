@@ -17,9 +17,15 @@ import { BASE_URL } from '../../config/base-url.token';
   deps: [HttpClient, BASE_URL],
 })
 export abstract class AbstractFlightService {
-  abstract search(params: { from?: string; to?: string }): Observable<Flight[]>;
+  abstract flightsMap$: Observable<Record<number, Flight>>;
+  abstract flights$: Observable<Flight[]>;
+  abstract loading$: Observable<boolean>;
+  abstract error$: Observable<string>;
+  abstract message$: Observable<string>;
 
-  abstract save(flight: Flight): Observable<Flight>;
+  abstract search(from?: string, to?: string): void;
 
-  abstract flightById(id: number): Observable<Flight>;
+  abstract save(flight: Flight): void;
+
+  abstract flightById(id: number): void;
 }

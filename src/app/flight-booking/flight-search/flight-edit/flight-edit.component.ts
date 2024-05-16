@@ -32,7 +32,6 @@ export class FlightEditComponent implements OnInit {
   @Output() save = new EventEmitter<Flight>();
   @Output() cancel = new EventEmitter<void>();
 
-
   form = new FormGroup<EditFlightForm>({
     id: new FormControl(
       { value: this.flight?.id, disabled: true },
@@ -40,11 +39,11 @@ export class FlightEditComponent implements OnInit {
     ),
     from: new FormControl(this.flight?.from, {
       nonNullable: true,
-      asyncValidators: [CityValidators.asyncValidateCity(this.flightService)],
+      // asyncValidators: [CityValidators.asyncValidateCity(this.flightService)],
     }),
     to: new FormControl(this.flight?.to, {
       nonNullable: true,
-      asyncValidators: [CityValidators.asyncValidateCity(this.flightService)],
+      // asyncValidators: [CityValidators.asyncValidateCity(this.flightService)],
     }),
     date: new FormControl(this.flight?.date, { nonNullable: true }),
     delayed: new FormControl(this.flight?.delayed, { nonNullable: true }),

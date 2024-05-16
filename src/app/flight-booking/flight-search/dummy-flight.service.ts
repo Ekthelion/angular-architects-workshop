@@ -1,13 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AbstractFlightService } from './flight.service';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { Flight } from '../../entities/flights';
 
 @Injectable()
 export class DummyFlightService implements AbstractFlightService {
   constructor() {}
 
-  search(params: { from: string; to: string }): Observable<Flight[]> {
+  private flightsMap = new BehaviorSubject<Record<number, Flight>>({});
+  private loading = new BehaviorSubject<boolean>(false);
+  private error = new BehaviorSubject<string>('');
+  private message = new BehaviorSubject<string>('');
+
+  readonly flightsMap$ = this.flightsMap.asObservable();
+  readonly flights$ = this.flightsMap$.pipe(
+    map((flightsMap) => Object.values(flightsMap))
+  );
+  readonly loading$ = this.loading.asObservable();
+  readonly error$ = this.error.asObservable();
+  readonly message$ = this.message.asObservable();
+
+  search(from: string, to: string): Observable<Flight[]> {
     return of([
       {
         id: 1,

@@ -72,7 +72,7 @@
 
 <div class="container">
   <app-flight-card
-    *ngFor="let flight of flights"
+    *ngFor="let flight of flightService.flights$ | async"
     [flight]="flight"
     [selected]="basket[flight.id]"
     (selectedChange)="basket[flight.id] = $event"
@@ -88,11 +88,8 @@
 </div>
 
 <div class="container">
-  <div class="alert alert-success" *ngIf="messageSuccess">
-    {{ messageSuccess }}
-  </div>
-  <div class="alert alert-danger" *ngIf="messageError">
-    {{ messageError }}
+  <div class="alert alert-success" *ngIf="flightService.message$ | async">
+    {{ flightService.message$ | async }}
   </div>
 </div>
 
