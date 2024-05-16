@@ -4,8 +4,10 @@ import {
   BehaviorSubject,
   ReplaySubject,
   Subject,
+  combineLatest,
   filter,
   map,
+  merge,
   of,
   skip,
   tap,
@@ -36,6 +38,17 @@ export class HomePageComponent {
       )
       .subscribe(console.log);
 
+    combineLatest({
+      a: of(1, 2, 3, 4, 5),
+      b: of(6, 7, 8, 9, 10),
+      c: this.subject,
+    }).subscribe((obs) => {
+      console.log('Combine:', obs);
+    });
+
+    setTimeout(() => {
+      this.subject.next(1);
+    }, 1000);
     // ASYNC DEMO
 
     // this.asyncSubject.subscribe(console.log);
